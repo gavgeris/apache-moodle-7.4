@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /data/gameculturegamification/site_data:/var/www/html
-      - ${SITE_HOST_ROOT}/moodledata:/var/www/moodledata
+      - /data/gameculturegamification/site_data/moodledata:/var/www/moodledata
     depends_on:
       - mysql
     environment:
@@ -27,7 +27,7 @@ services:
     ports:
       - "127.0.0.1:5436:3306"
     volumes:
-      - ${SITE_HOST_ROOT}/db_data:/var/lib/mysql
+      - /data/gameculturegamification/site_data/db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${SERVICE_PASSWORD_ROOT}
       - MYSQL_DATABASE=${DB_NAME}
