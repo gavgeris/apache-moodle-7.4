@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "8080:80"
     volumes:
       - ${SITE_HOST_ROOT}/site_data:/var/www/html
       - ${SITE_HOST_ROOT}/moodledata:/var/www/moodledata
