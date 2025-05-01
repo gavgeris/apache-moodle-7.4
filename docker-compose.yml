@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - 'site_data:/var/www/html'
-      - /data/gameculturegamification/site_data/moodledata:/var/www/moodledata
+      - /data/gameculturegamification/moodledata:/var/www/moodledata
     depends_on:
       - mysql
     environment:
