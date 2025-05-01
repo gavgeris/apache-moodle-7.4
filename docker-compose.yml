@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - site_data:/app/var/www/html
-      - moodledata:/app/var/www/moodledata
+      - 'site_data:/var/www/html'
+      - /data/gameculturegamification/site_data/moodledata:/var/www/moodledata
     depends_on:
       - mysql
     environment:
@@ -27,7 +27,7 @@ services:
     ports:
       - "127.0.0.1:5436:3306"
     volumes:
-      - db_data:/app/var/lib/mysql
+      - /data/gameculturegamification/db_data/db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${SERVICE_PASSWORD_ROOT}
       - MYSQL_DATABASE=${DB_NAME}
