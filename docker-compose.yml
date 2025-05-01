@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ${SITE_HOST_ROOT}/site_data:/var/www/html
+      - ${SITE_HOST_ROOT}/moodledata:/var/www/moodledata
+    depends_on:
+      - mysql
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - '-f'
+        - 'http://127.0.0.1'
+      interval: 2s
+      timeout: 10s
+      retries: 10
+
+  mysql:
+    image: 'mysql:8'
+    ports:
+      - "5435:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SERVICE_PASSWORD_ROOT}
+      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+      - MYSQL_USER=${SERVICE_USER_WORDPRESS}
+      - MYSQL_PASSWORD=${SERVICE_PASSWORD_WORDPRESS}
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-h'
+        - 127.0.0.1
+      interval: 5s
+      timeout: 20s
+      retries: 10
