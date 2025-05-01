@@ -32,9 +32,9 @@ services:
       - ./db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${SERVICE_PASSWORD_ROOT}
-      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
-      - MYSQL_USER=${SERVICE_USER_WORDPRESS}
-      - MYSQL_PASSWORD=${SERVICE_PASSWORD_WORDPRESS}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${SERVICE_USER_MOODLE}
+      - MYSQL_PASSWORD=${SERVICE_PASSWORD_MOODLE}
     healthcheck:
       test:
         - CMD
