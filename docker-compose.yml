@@ -27,7 +27,7 @@ services:
     ports:
       - "127.0.0.1:5436:3306"
     volumes:
-      - ${HOST_SITE_ROOT}/db_data/db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${SERVICE_PASSWORD_ROOT}
       - MYSQL_DATABASE=${DB_NAME}
