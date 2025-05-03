@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     curl \
     wget \
+    cron \
     libmagickwand-dev --no-install-recommends
 
 # Enable Apache mods
@@ -41,7 +42,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     mysqli \
     xsl \
     curl \
-    cron \
     exif
 
 # Download and install Moosh
