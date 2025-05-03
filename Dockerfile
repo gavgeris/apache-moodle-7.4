@@ -41,6 +41,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     mysqli \
     xsl \
     curl \
+    cron \
     exif
 
 # Download and install Moosh
