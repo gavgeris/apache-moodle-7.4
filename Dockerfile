@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libcurl4-openssl-dev \
     libpq-dev \
+    nano \
+    curl \
+    wget \
     libmagickwand-dev --no-install-recommends
 
 # Enable Apache mods
@@ -40,6 +43,18 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     curl \
     exif
 
+# Download and install Moosh
+RUN cd /opt && \
+    wget https://moodle.org/plugins/download.php/33902/moosh_moodle45_2024111400.zip && \
+    unzip moosh_moodle45_2024111400.zip && \
+    ln -s /opt/moosh/moosh.php /usr/local/bin/moosh && \
+    rm moosh_moodle45_2024111400.zip  # Clean up zip file
+
+
+# Install Redis extension
+RUN pecl install redis && \
+    docker-php-ext-enable redis
+
 # Optional: Install and enable Imagick (used by Moodle for better image processing)
 RUN pecl install imagick && docker-php-ext-enable imagick
 
@@ -47,7 +62,7 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 COPY moodle-php.ini /usr/local/etc/php/conf.d/moodle-php.ini
 
 # Create moodledata directory
-RUN mkdir -p /var/www/moodledata && \
+    chown -R www-data:www-data /var/www/moodledata && \
     chmod -R 770 /var/www/moodledata
 
 # Set working directory
