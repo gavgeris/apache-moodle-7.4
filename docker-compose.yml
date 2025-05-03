@@ -24,8 +24,8 @@ services:
 
   mysql:
     image: 'mysql:8'
-    ports:
-      - "127.0.0.1:${SERVICE_PORT}:3306"
+#    ports:
+#      - "127.0.0.1:5436:3306"
     volumes:
       - ./db_data:/var/lib/mysql
     environment:
