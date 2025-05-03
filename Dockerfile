@@ -66,5 +66,19 @@ RUN mkdir -p /var/www/moodledata && \
     # chown -R www-data:www-data /var/www/moodledata && \
     chmod -R 770 /var/www/moodledata
 
+
+# Set up Moodle cron job
+COPY moodle-cron /etc/cron.d/moodle-cron
+RUN chmod 0644 /etc/cron.d/moodle-cron && \
+    crontab /etc/cron.d/moodle-cron
+
+# Create startup script to run cron and apache
+COPY start.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/start.sh
+
 # Set working directory
 WORKDIR /var/www/html
+
+# Set entrypoint to our startup script
+ENTRYPOINT ["/usr/local/bin/start.sh"]
+

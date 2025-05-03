@@ -1,0 +1,2 @@
+# Run Moodle cron every minute
+* * * * * /usr/local/bin/php /var/www/html/admin/cli/cron.php > /dev/null 2>&1
