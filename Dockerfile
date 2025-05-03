@@ -62,7 +62,8 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 COPY moodle-php.ini /usr/local/etc/php/conf.d/moodle-php.ini
 
 # Create moodledata directory
-    chown -R www-data:www-data /var/www/moodledata && \
+RUN mkdir -p /var/www/moodledata && \
+    # chown -R www-data:www-data /var/www/moodledata && \
     chmod -R 770 /var/www/moodledata
 
 # Set working directory
