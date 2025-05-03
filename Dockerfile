@@ -64,7 +64,7 @@ COPY moodle-php.ini /usr/local/etc/php/conf.d/moodle-php.ini
 
 # Create moodledata directory
 RUN mkdir -p /var/www/moodledata && \
-    # chown -R www-data:www-data /var/www/moodledata && \
+    chown -R www-data:www-data /var/www/moodledata && \
     chmod -R 770 /var/www/moodledata
 
 
