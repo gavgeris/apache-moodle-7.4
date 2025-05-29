@@ -33,7 +33,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     intl \
     mbstring \
     xml \
-    xmlrpc \
     soap \
     zip \
     pdo \
@@ -55,6 +54,8 @@ RUN cd /opt && \
 # Install Redis extension
 RUN pecl install redis && \
     docker-php-ext-enable redis
+
+RUN pecl install channel://pecl.php.net/xmlrpc-1.0.0RC3 && docker-php-ext-enable xmlrpc
 
 # Optional: Install and enable Imagick (used by Moodle for better image processing)
 RUN pecl install imagick && docker-php-ext-enable imagick
