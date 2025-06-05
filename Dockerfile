@@ -60,8 +60,15 @@ RUN pecl install channel://pecl.php.net/xmlrpc-1.0.0RC3 && docker-php-ext-enable
 # Optional: Install and enable Imagick (used by Moodle for better image processing)
 RUN pecl install imagick && docker-php-ext-enable imagick
 
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 # Set recommended PHP configuration values for Moodle
 COPY moodle-php.ini /usr/local/etc/php/conf.d/moodle-php.ini
+
+# Copy custom php.ini
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Create moodledata directory
 RUN mkdir -p /var/www/moodledata && \
