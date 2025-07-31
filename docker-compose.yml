@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - ./site_data:/var/www/html
       - ./moodledata:/var/www/moodledata
@@ -24,6 +25,7 @@ services:
 
   mysql:
     image: 'mysql:8'
+    restart: always
 #    ports:
 #      - "127.0.0.1:5436:3306"
     volumes:
