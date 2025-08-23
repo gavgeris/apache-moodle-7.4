@@ -48,6 +48,7 @@ services:
 
   redis:
     image: 'redis:alpine'
+    restart: always
     volumes:
       - ./redis_data:/data
     healthcheck:
