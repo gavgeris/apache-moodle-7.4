@@ -43,12 +43,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     curl \
     exif
 
-# Download and install Moosh
-RUN cd /opt && \
-    wget https://moodle.org/plugins/download.php/33902/moosh_moodle45_2024111400.zip && \
-    unzip moosh_moodle45_2024111400.zip && \
-    ln -s /opt/moosh/moosh.php /usr/local/bin/moosh && \
-    rm moosh_moodle45_2024111400.zip  # Clean up zip file
+# Install Moosh (phar build straight from the upstream GitHub release)
+RUN wget -q -O /usr/local/bin/moosh \
+        https://github.com/tmuras/moosh/releases/download/phar-latest/moosh.phar \
+    && chmod +x /usr/local/bin/moosh
 
 
 # Install Redis extension
